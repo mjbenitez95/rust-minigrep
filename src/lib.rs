@@ -55,4 +55,45 @@ Pick three.";
 
         assert_eq!(vec!["safe, fast, productive."], search(query, contents));
     }
+
+    #[test]
+    fn many_results() {
+        let query = "body";
+        let contents = "\
+I’m nobody! Who are you?
+Are you nobody, too?
+Then there’s a pair of us - don’t tell!
+They’d banish us, you know.
+
+How dreary to be somebody!
+How public, like a frog
+To tell your name the livelong day
+To an admiring bog!";
+
+        assert_eq!(
+            vec![
+                "I’m nobody! Who are you?",
+                "Are you nobody, too?",
+                "How dreary to be somebody!"
+            ],
+            search(query, contents)
+        );
+    }
+
+    #[test]
+    fn no_results() {
+        let query = "monomorphization";
+        let contents = "\
+I’m nobody! Who are you?
+Are you nobody, too?
+Then there’s a pair of us - don’t tell!
+They’d banish us, you know.
+
+How dreary to be somebody!
+How public, like a frog
+To tell your name the livelong day
+To an admiring bog!";
+
+        assert!(search(query, contents).is_empty());
+    }
 }
