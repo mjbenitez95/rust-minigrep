@@ -1,14 +1,15 @@
 use std::{env, process};
+use minigrep::Config;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    let config = minigrep::Config::new(&args).unwrap_or_else(|err| {
+    let config = Config::new(&args).unwrap_or_else(|err| {
         println!("Problem parsing arguments: {}", err);
         process::exit(1);
     });
 
     println!(
-        "This program will search for \"{}\" in file {}",
+        "This program will search for \"{}\" in file {}.",
         config.query, config.filename
     );
 
